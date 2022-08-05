@@ -1,21 +1,12 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
-  <div
-    id="app"
-    class="
-      flex
-      items-center
-      bg-gray-900
-      w-screen
-      h-screen
-      text-center
-      justify-center
-    "
-  >
+  <Navbar></Navbar>
+  <div id="app" class="bg-slate-900 w-screen min-h-screen">
     <router-view></router-view>
   </div>
 </template>
