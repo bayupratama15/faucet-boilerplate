@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar.vue";
 
 <template>
   <Navbar></Navbar>
-  <div id="app" class="bg-slate-900 w-screen min-h-screen">
+  <div id="app" class="bg-slate-900 h-screen">
     <router-view></router-view>
   </div>
 </template>
