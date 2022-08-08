@@ -153,7 +153,7 @@ export default {
       window.web3 = new Web3(window.web3.currentProvider);
     } else {
       window.web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.brewhost.org/")
+        new Web3.providers.HttpProvider("http://localhost:8545/")
       );
     }
     this.getAccount();
@@ -165,59 +165,65 @@ export default {
     },
     async sendTransaction() {
       // SWAL UNDER MAINTAINANCE
-      Swal.fire({
-        title: "Under Maintenance",
-        text: "Please try again later",
-        icon: "warning",
-        confirmButtonText: "OK",
-      });
-      // if (this.address == "") {
-      //   Swal.fire({
-      //     title: "Error",
-      //     text: "Please enter an address",
-      //     icon: "error",
-      //     confirmButtonText: "OK",
-      //   });
-      //   return;
-      // }
-      // this.loading = true;
-      // const privKey =
-      //   "b635cd30983e9d8cc530eb27d0988d3ef1e87d97cd6bf845ae25f4d619fa257c";
-      // const addressFrom = "0xae43bebd1cb0f377a433846cdfb810d28ca189a5";
-      // const web3 = new Web3(
-      //   new Web3.providers.HttpProvider("https://rpc.brewhost.org/")
-      // );
-      // try {
-      //   const nonce = await web3.eth.getTransactionCount(addressFrom);
-      //   console.log(nonce);
-      //   const tx = {
-      //     nonce: web3.utils.toHex(nonce),
-      //     gasLimit: web3.utils.toHex(1000000),
-      //     gasPrice: web3.utils.toHex(web3.utils.toWei("10", "gwei")),
-      //     to: this.address,
-      //     value: web3.utils.toHex(web3.utils.toWei("1", "ether")),
-      //     data: "0x",
-      //   };
-      //   const signedTx = await web3.eth.accounts.signTransaction(tx, privKey);
-      //   const receipt = await web3.eth.sendSignedTransaction(
-      //     signedTx.rawTransaction
-      //   );
-      //   this.loading = false;
-      //   Swal.fire({
-      //     title: "Success",
-      //     text: "Transaction sent",
-      //     icon: "success",
-      //     confirmButtonText: "OK",
-      //   });
-      // } catch (error) {
-      //   this.loading = false;
-      //   Swal.fire({
-      //     title: "Error",
-      //     text: "Transaction failed",
-      //     icon: "error",
-      //     confirmButtonText: "OK",
-      //   });
-      // }
+      // Swal.fire({
+      //   title: "Under Maintenance",
+      //   text: "Please try again later",
+      //   icon: "warning",
+      //   confirmButtonText: "OK",
+      // });
+      if (this.address == "") {
+        Swal.fire({
+          title: "Error",
+          text: "Please enter an address",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        return;
+      }
+      this.loading = true;
+      const privKey =
+        "c3d93df55ec90bf5469dee4cbfce1101b211172006f8d5a6f3b41c34491772a2";
+      const addressFrom = "0x44B1774e416f279944E05df47D11A194dC1D07b9";
+      const web3 = new Web3(
+        new Web3.providers.HttpProvider("https://rpc.brewhost.org/")
+      );
+      try {
+        const nonce = await web3.eth.getTransactionCount(addressFrom);
+        console.log(nonce);
+        const tx = {
+          nonce: web3.utils.toHex(nonce),
+          gasLimit: web3.utils.toHex(1000000),
+          gasPrice: web3.utils.toHex(web3.utils.toWei("1", "gwei")),
+          to: this.address,
+          value: web3.utils.toHex(web3.utils.toWei("1", "ether")),
+        };
+        const signedTx = await web3.eth.accounts.signTransaction(tx, privKey);
+        const receipt = await web3.eth.sendSignedTransaction(
+          signedTx.rawTransaction
+        );
+        console.log(receipt);
+        this.loading = false;
+        Swal.fire({
+          title: "Success",
+          text: "Transaction sent",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          // redirect to tx page target="_blank"
+          window.open(
+            `https://explorer.brewhost.org/tx/${receipt.transactionHash}`,
+            "_blank"
+          );
+        });
+      } catch (error) {
+        this.loading = false;
+        Swal.fire({
+          title: "Error",
+          text: "Transaction failed",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
     },
   },
 };
