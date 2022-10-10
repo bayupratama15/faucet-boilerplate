@@ -5,8 +5,8 @@ import Navbar from "./components/Navbar.vue";
 </script>
 
 <template>
-  <Navbar></Navbar>
-  <div id="app" class="bg-slate-900 h-screen">
+  <!-- <Navbar></Navbar> -->
+  <div id="app">
     <router-view></router-view>
   </div>
 </template>
