@@ -67,7 +67,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet
+                    Faucet Cryon Network
                   </span>
                 </div>
               </div>
@@ -169,6 +169,8 @@ export default {
           timer: 1500,
         });
         this.getAccount();
+        this.btnTransaction = true;
+        this.btnMetamask = false;
       }
       if (chainId !== "0x1113") {
         Swal.fire({
