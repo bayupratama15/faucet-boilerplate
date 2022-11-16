@@ -158,10 +158,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON CRYON TESTNET THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON CRYON BETA-MAINNET THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x1113") {
+      if (chainId === "0x1114") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -172,27 +172,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x1113") {
+      if (chainId !== "0x1114") {
         Swal.fire({
-          title: "Please add Cryon Testnet",
-          text: "Please add Cryon Testnet to your metamask",
+          title: "Please add Cryon BETA-MAINNET",
+          text: "Please add Cryon BETA-MAINNET to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Cryon Testnet",
+          confirmButtonText: "Add Cryon BETA-MAINNET",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x1113",
-                  chainName: "Cryon Network Testnet",
+                  chainId: "0x1114",
+                  chainName: "Cryon Network BETA-MAINNET",
                   nativeCurrency: {
                     name: "Cryon Network",
                     symbol: "CRYON",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://node.cryonetwork.net/"],
-                  blockExplorerUrls: ["https://explorer.cryonetwork.net/"],
+                  rpcUrls: ["https://beta-node.cryonetwork.net/"],
+                  blockExplorerUrls: ["https://beta-mainnet.cryonetwork.net/"],
                 },
               ],
             });
@@ -205,8 +205,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x1113 then add chain on metamask
-    if (chainId !== "0x1113") {
+    // if chainid is not 0x1114 then add chain on metamask
+    if (chainId !== "0x1114") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -238,10 +238,10 @@ export default {
       }
       this.loading = true;
       const privKey =
-        "f69d2f1d6f3dbef55d0c204d3c8280209d82a8d1377aa3cc96544ca0f3de7443";
-      const addressFrom = "0x3fE8b14FadD78d379c0cCBB09d7141eb3BE4EBf5";
+        "1bee073b96680ee66c5c9dbe810aa237d465c6ee0093ea3f75bfc34ba7dd46d7";
+      const addressFrom = "0x423D0889C0b63bcB9a00AcAd7dEe8855703ab3F2";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://node.cryonetwork.net/")
+        new Web3.providers.HttpProvider("https://beta-node.cryonetwork.net/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -267,7 +267,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.cryonetwork.net/tx/${receipt.transactionHash}`,
+            `https://beta-mainnet.cryonetwork.net/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -287,15 +287,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x1113",
-            chainName: "Cryon Network Testnet",
+            chainId: "0x1114",
+            chainName: "Cryon Network BETA-MAINNET",
             nativeCurrency: {
               name: "Cryon Network",
               symbol: "CRYON",
               decimals: 18,
             },
-            rpcUrls: ["https://node.cryonetwork.net/"],
-            blockExplorerUrls: ["https://explorer.cryonetwork.net/"],
+            rpcUrls: ["https://beta-node.cryonetwork.net/"],
+            blockExplorerUrls: ["https://beta-mainnet.cryonetwork.net/"],
           },
         ],
       });
