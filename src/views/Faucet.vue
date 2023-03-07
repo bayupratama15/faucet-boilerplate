@@ -1,6 +1,4 @@
 <template>
-  <!-- LOADING -->
-  <!-- Loading -->
   <div
     v-if="loading"
     class="flex justify-center items-center h-screen fixed top-0 left-0 right-0 bottom-0 w-full z-50 overflow-hidden bg-gray-700 opacity-75"
@@ -33,11 +31,9 @@
       </span>
     </div>
   </div>
-  <!-- Loading -->
   <div
     class="container mx-auto p-6 bg-blue-900 flex h-screen justify-center items-center"
   >
-    <!-- main container od cards -->
     <div class="flex-1 p-4">
       <div
         class="card w-full h-full bg-transparent hover:bg-gradient-to-r hover: hover:to-[#b2eff7] transition hover:rounded-lg hover:drop-shadow-3xl hover:ease-in-out"
@@ -67,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet Cryon Network
+                    Faucet PAW Chain
                   </span>
                 </div>
               </div>
@@ -158,10 +154,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON CRYON BETA-MAINNET THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Paw Chain Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x1114") {
+      if (chainId === "0x573b") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -172,27 +168,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x1114") {
+      if (chainId !== "0x573b") {
         Swal.fire({
-          title: "Please add Cryon BETA-MAINNET",
-          text: "Please add Cryon BETA-MAINNET to your metamask",
+          title: "Please add Paw Chain Testnet",
+          text: "Please add Paw Chain Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Cryon BETA-MAINNET",
+          confirmButtonText: "Add Paw Chain Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x1114",
-                  chainName: "Cryon Network BETA-MAINNET",
+                  chainId: "0x573b",
+                  chainName: "Paw Chain Testnet",
                   nativeCurrency: {
-                    name: "Cryon Network",
-                    symbol: "CRYON",
+                    name: "Paw",
+                    symbol: "PAW",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://beta-node.cryonetwork.net/"],
-                  blockExplorerUrls: ["https://beta-mainnet.cryonetwork.net/"],
+                  rpcUrls: ["https://rpc.pawchain.org/"],
+                  blockExplorerUrls: ["https://explorer.pawchain.org/"],
                 },
               ],
             });
@@ -205,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x1114 then add chain on metamask
-    if (chainId !== "0x1114") {
+    // if chainid is not 0x573b then add chain on metamask
+    if (chainId !== "0x573b") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -238,10 +234,10 @@ export default {
       }
       this.loading = true;
       const privKey =
-        "1bee073b96680ee66c5c9dbe810aa237d465c6ee0093ea3f75bfc34ba7dd46d7";
-      const addressFrom = "0x423D0889C0b63bcB9a00AcAd7dEe8855703ab3F2";
+        "4497a37388bf4f480a2ace457ef7a7e8b2f09676ef71593626019cd662f84206";
+      const addressFrom = "0x47AE18E8D548c1f2EB658B7177B0d69cF3387D59";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://beta-node.cryonetwork.net/")
+        new Web3.providers.HttpProvider("https://rpc.pawchain.org/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -267,7 +263,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://beta-mainnet.cryonetwork.net/tx/${receipt.transactionHash}`,
+            `https://explorer.pawchain.org/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -287,15 +283,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x1114",
-            chainName: "Cryon Network BETA-MAINNET",
+            chainId: "0x573b",
+            chainName: "Paw Chain Testnet",
             nativeCurrency: {
-              name: "Cryon Network",
-              symbol: "CRYON",
+              name: "Paw",
+              symbol: "PAW",
               decimals: 18,
             },
-            rpcUrls: ["https://beta-node.cryonetwork.net/"],
-            blockExplorerUrls: ["https://beta-mainnet.cryonetwork.net/"],
+            rpcUrls: ["https://rpc.pawchain.org/"],
+            blockExplorerUrls: ["https://explorer.pawchain.org/"],
           },
         ],
       });

@@ -6,15 +6,10 @@
           class="absolute inset-y-0 left-0 flex items-center sm:hidden"
         ></div>
         <div
-          class="
-            flex-1 flex
-            items-center
-            justify-center
-            sm:items-stretch sm:justify-start
-          "
+          class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
         >
           <div class="flex-shrink-0 flex items-center">
-            <img
+            <!-- <img
               class="block lg:hidden h-8 w-auto"
               src="/brewhost_text.svg"
               alt="Brewhost"
@@ -23,7 +18,7 @@
               class="hidden lg:block h-8 w-auto"
               src="/brewhost_text.svg"
               alt="Brewhost"
-            />
+            /> -->
           </div>
         </div>
       </div>
@@ -49,5 +44,4 @@ const navigation = [
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
 ];
-const imageUrl = new URL("./assets/brewhost_text.svg", import.meta.url).href;
 </script>
