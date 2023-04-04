@@ -63,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet PAW Chain
+                    Faucet Centaurus Chain
                   </span>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON Paw Chain Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Centaurus Chain Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
       if (chainId === "0x573b") {
@@ -170,10 +170,10 @@ export default {
       }
       if (chainId !== "0x573b") {
         Swal.fire({
-          title: "Please add Paw Chain Testnet",
-          text: "Please add Paw Chain Testnet to your metamask",
+          title: "Please add Centaurus Chain Testnet",
+          text: "Please add Centaurus Chain Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Paw Chain Testnet",
+          confirmButtonText: "Add Centaurus Chain Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
@@ -181,14 +181,14 @@ export default {
               params: [
                 {
                   chainId: "0x573b",
-                  chainName: "Paw Chain Testnet",
+                  chainName: "Centaurus Chain Testnet",
                   nativeCurrency: {
-                    name: "Paw",
-                    symbol: "PAW",
+                    name: "Centaurus",
+                    symbol: "Centaurus",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.pawchain.org/"],
-                  blockExplorerUrls: ["https://explorer.pawchain.org/"],
+                  rpcUrls: ["https://rpc.Centauruschain.org/"],
+                  blockExplorerUrls: ["https://explorer.Centauruschain.org/"],
                 },
               ],
             });
@@ -237,7 +237,7 @@ export default {
         "4497a37388bf4f480a2ace457ef7a7e8b2f09676ef71593626019cd662f84206";
       const addressFrom = "0x47AE18E8D548c1f2EB658B7177B0d69cF3387D59";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.pawchain.org/")
+        new Web3.providers.HttpProvider("https://rpc.Centauruschain.org/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -263,7 +263,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.pawchain.org/tx/${receipt.transactionHash}`,
+            `https://explorer.Centauruschain.org/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -284,14 +284,14 @@ export default {
         params: [
           {
             chainId: "0x573b",
-            chainName: "Paw Chain Testnet",
+            chainName: "Centaurus Chain Testnet",
             nativeCurrency: {
-              name: "Paw",
-              symbol: "PAW",
+              name: "Centaurus",
+              symbol: "Centaurus",
               decimals: 18,
             },
-            rpcUrls: ["https://rpc.pawchain.org/"],
-            blockExplorerUrls: ["https://explorer.pawchain.org/"],
+            rpcUrls: ["https://rpc.Centauruschain.org/"],
+            blockExplorerUrls: ["https://explorer.Centauruschain.org/"],
           },
         ],
       });
