@@ -157,7 +157,7 @@ export default {
     // DETECTION OF NETWORK IF NOT ON Centaurus Chain Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x573b") {
+      if (chainId === "0x12f5d") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,7 +168,7 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x573b") {
+      if (chainId !== "0x12f5d") {
         Swal.fire({
           title: "Please add Centaurus Chain Testnet",
           text: "Please add Centaurus Chain Testnet to your metamask",
@@ -180,15 +180,15 @@ export default {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x573b",
+                  chainId: "0x12f5d",
                   chainName: "Centaurus Chain Testnet",
                   nativeCurrency: {
                     name: "Centaurus",
                     symbol: "Centaurus",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.Centauruschain.org/"],
-                  blockExplorerUrls: ["https://explorer.Centauruschain.org/"],
+                  rpcUrls: ["https://rpc.centachain.com/"],
+                  blockExplorerUrls: ["https://explorer.centachain.com/"],
                 },
               ],
             });
@@ -201,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x573b then add chain on metamask
-    if (chainId !== "0x573b") {
+    // if chainid is not 0x12f5d then add chain on metamask
+    if (chainId !== "0x12f5d") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -216,13 +216,6 @@ export default {
       this.address = accounts[0];
     },
     async sendTransaction() {
-      // SWAL UNDER MAINTAINANCE
-      // Swal.fire({
-      //   title: "Under Maintenance",
-      //   text: "Please try again later",
-      //   icon: "warning",
-      //   confirmButtonText: "OK",
-      // });
       if (this.address == "") {
         Swal.fire({
           title: "Error",
@@ -237,7 +230,7 @@ export default {
         "4497a37388bf4f480a2ace457ef7a7e8b2f09676ef71593626019cd662f84206";
       const addressFrom = "0x47AE18E8D548c1f2EB658B7177B0d69cF3387D59";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.Centauruschain.org/")
+        new Web3.providers.HttpProvider("https://rpc.centachain.com/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -263,7 +256,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.Centauruschain.org/tx/${receipt.transactionHash}`,
+            `https://explorer.centachain.com/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -283,15 +276,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x573b",
+            chainId: "0x12f5d",
             chainName: "Centaurus Chain Testnet",
             nativeCurrency: {
               name: "Centaurus",
               symbol: "Centaurus",
               decimals: 18,
             },
-            rpcUrls: ["https://rpc.Centauruschain.org/"],
-            blockExplorerUrls: ["https://explorer.Centauruschain.org/"],
+            rpcUrls: ["https://rpc.centachain.com/"],
+            blockExplorerUrls: ["https://explorer.centachain.com/"],
           },
         ],
       });
