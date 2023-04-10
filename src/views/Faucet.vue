@@ -63,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet Centaurus Chain
+                    Faucet Blockscape
                   </span>
                 </div>
               </div>
@@ -154,10 +154,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON Centaurus Chain Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Blockscape Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x12f5d") {
+      if (chainId === "0x2b71") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,27 +168,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x12f5d") {
+      if (chainId !== "0x2b71") {
         Swal.fire({
-          title: "Please add Centaurus Chain Testnet",
-          text: "Please add Centaurus Chain Testnet to your metamask",
+          title: "Please add Blockscape Testnet",
+          text: "Please add Blockscape Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Centaurus Chain Testnet",
+          confirmButtonText: "Add Blockscape Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x12f5d",
-                  chainName: "Centaurus Chain Testnet",
+                  chainId: "0x2b71",
+                  chainName: "Blockscape  Testnet",
                   nativeCurrency: {
-                    name: "Centaurus",
-                    symbol: "Centaurus",
+                    name: "Blockscape",
+                    symbol: "Blockscape",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.centachain.com/"],
-                  blockExplorerUrls: ["https://explorer.centachain.com/"],
+                  rpcUrls: ["https://rpc.blockscape.net/"],
+                  blockExplorerUrls: ["https://explorer.blockscape.net/"],
                 },
               ],
             });
@@ -201,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x12f5d then add chain on metamask
-    if (chainId !== "0x12f5d") {
+    // if chainid is not 0x2b71 then add chain on metamask
+    if (chainId !== "0x2b71") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -227,10 +227,10 @@ export default {
       }
       this.loading = true;
       const privKey =
-        "4497a37388bf4f480a2ace457ef7a7e8b2f09676ef71593626019cd662f84206";
-      const addressFrom = "0x47AE18E8D548c1f2EB658B7177B0d69cF3387D59";
+        "84fc7aacc1f8ef35f42c959ba9ad3d316f0e834e85458d99b6cec2d2cb87ac70";
+      const addressFrom = "0xA789E6DBecAA86B54aD30b45337ccA2c29d59f6D";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.centachain.com/")
+        new Web3.providers.HttpProvider("https://rpc.blockscape.net/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -256,7 +256,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.centachain.com/tx/${receipt.transactionHash}`,
+            `https://explorer.blockscape.net/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -276,15 +276,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x12f5d",
-            chainName: "Centaurus Chain Testnet",
+            chainId: "0x2b71",
+            chainName: "Blockscape Testnet",
             nativeCurrency: {
-              name: "Centaurus",
-              symbol: "Centaurus",
+              name: "Blockscape",
+              symbol: "Blockscape",
               decimals: 18,
             },
-            rpcUrls: ["https://rpc.centachain.com/"],
-            blockExplorerUrls: ["https://explorer.centachain.com/"],
+            rpcUrls: ["https://rpc.blockscape.net/"],
+            blockExplorerUrls: ["https://explorer.blockscape.net/"],
           },
         ],
       });
