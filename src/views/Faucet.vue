@@ -63,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet Blockscape
+                    Faucet TWETORO
                   </span>
                 </div>
               </div>
@@ -154,10 +154,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON Blockscape Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON TWETORO Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x2b71") {
+      if (chainId === "0xae07") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,27 +168,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x2b71") {
+      if (chainId !== "0xae07") {
         Swal.fire({
-          title: "Please add Blockscape Testnet",
-          text: "Please add Blockscape Testnet to your metamask",
+          title: "Please add TWETORO Testnet",
+          text: "Please add TWETORO Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Blockscape Testnet",
+          confirmButtonText: "Add TWETORO Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x2b71",
-                  chainName: "Blockscape  Testnet",
+                  chainId: "0xae07",
+                  chainName: "TWETORO  Testnet",
                   nativeCurrency: {
-                    name: "Blockscape",
-                    symbol: "Blockscape",
+                    name: "TWETORO",
+                    symbol: "TWETORO",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.blockscape.net/"],
-                  blockExplorerUrls: ["https://explorer.blockscape.net/"],
+                  rpcUrls: ["https://rpc.twetoronetwork.com/"],
+                  blockExplorerUrls: ["https://explorer.twetoronetwork.com/"],
                 },
               ],
             });
@@ -201,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x2b71 then add chain on metamask
-    if (chainId !== "0x2b71") {
+    // if chainid is not 0xae07 then add chain on metamask
+    if (chainId !== "0xae07") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -227,10 +227,10 @@ export default {
       }
       this.loading = true;
       const privKey =
-        "84fc7aacc1f8ef35f42c959ba9ad3d316f0e834e85458d99b6cec2d2cb87ac70";
-      const addressFrom = "0xA789E6DBecAA86B54aD30b45337ccA2c29d59f6D";
+        "a347ce51e190978f4103e0b3bb5ac8a1675e641afe70b0af3115023c3c44407b";
+      const addressFrom = "0x42Cfc422E2c078759eb252ba72E9578479679826";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.blockscape.net/")
+        new Web3.providers.HttpProvider("https://rpc.twetoronetwork.com/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -256,7 +256,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.blockscape.net/tx/${receipt.transactionHash}`,
+            `https://explorer.twetoronetwork.com/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -276,15 +276,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x2b71",
-            chainName: "Blockscape Testnet",
+            chainId: "0xae07",
+            chainName: "TWETORO Network Testnet",
             nativeCurrency: {
-              name: "Blockscape",
-              symbol: "Blockscape",
+              name: "TWETORO",
+              symbol: "TWETORO",
               decimals: 18,
             },
-            rpcUrls: ["https://rpc.blockscape.net/"],
-            blockExplorerUrls: ["https://explorer.blockscape.net/"],
+            rpcUrls: ["https://rpc.twetoronetwork.com/"],
+            blockExplorerUrls: ["https://explorer.twetoronetwork.com/"],
           },
         ],
       });

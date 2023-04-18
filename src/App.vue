@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar.vue";
 
 <template>
   <!-- <Navbar></Navbar> -->
-  <div id="app">
+  <div id="app" class="bg-blue-900">
     <router-view></router-view>
   </div>
 </template>
