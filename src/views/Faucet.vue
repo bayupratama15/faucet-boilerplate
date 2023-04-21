@@ -63,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet TWETORO
+                    Faucet Layer
                   </span>
                 </div>
               </div>
@@ -154,10 +154,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON TWETORO Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Layer Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0xae07") {
+      if (chainId === "0x107d7") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,27 +168,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0xae07") {
+      if (chainId !== "0x107d7") {
         Swal.fire({
-          title: "Please add TWETORO Testnet",
-          text: "Please add TWETORO Testnet to your metamask",
+          title: "Please add Layer Testnet",
+          text: "Please add Layer Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add TWETORO Testnet",
+          confirmButtonText: "Add Layer Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0xae07",
-                  chainName: "TWETORO  Testnet",
+                  chainId: "0x107d7",
+                  chainName: "Layer  Testnet",
                   nativeCurrency: {
-                    name: "TWETORO",
-                    symbol: "TWETORO",
+                    name: "Layer",
+                    symbol: "Layer",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.twetoronetwork.com/"],
-                  blockExplorerUrls: ["https://explorer.twetoronetwork.com/"],
+                  rpcUrls: ["https://rpctestnet.layernetwork.org/"],
+                  blockExplorerUrls: ["https://explorer.layernetwork.org/"],
                 },
               ],
             });
@@ -201,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0xae07 then add chain on metamask
-    if (chainId !== "0xae07") {
+    // if chainid is not 0x107d7 then add chain on metamask
+    if (chainId !== "0x107d7") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -230,7 +230,7 @@ export default {
         "a347ce51e190978f4103e0b3bb5ac8a1675e641afe70b0af3115023c3c44407b";
       const addressFrom = "0x42Cfc422E2c078759eb252ba72E9578479679826";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.twetoronetwork.com/")
+        new Web3.providers.HttpProvider("https://rpctestnet.layernetwork.org/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -256,7 +256,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.twetoronetwork.com/tx/${receipt.transactionHash}`,
+            `https://explorer.layernetwork.org/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -276,15 +276,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0xae07",
-            chainName: "TWETORO Network Testnet",
+            chainId: "0x107d7",
+            chainName: "Layer Network Testnet",
             nativeCurrency: {
-              name: "TWETORO",
-              symbol: "TWETORO",
-              decimals: 18,
+              name: "Layer",
+              symbol: "Layer",
+              decimals: 9,
             },
-            rpcUrls: ["https://rpc.twetoronetwork.com/"],
-            blockExplorerUrls: ["https://explorer.twetoronetwork.com/"],
+            rpcUrls: ["https://rpctestnet.layernetwork.org/"],
+            blockExplorerUrls: ["https://explorer.layernetwork.org/"],
           },
         ],
       });
