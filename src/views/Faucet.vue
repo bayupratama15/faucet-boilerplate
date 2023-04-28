@@ -63,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet Theta
+                    Faucet Numerix
                   </span>
                 </div>
               </div>
@@ -154,10 +154,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON Theta Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Numerix Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x15a4e") {
+      if (chainId === "0xff3d") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,27 +168,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x15a4e") {
+      if (chainId !== "0xff3d") {
         Swal.fire({
-          title: "Please add Theta Testnet",
-          text: "Please add Theta Testnet to your metamask",
+          title: "Please add Numerix Testnet",
+          text: "Please add Numerix Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Theta Testnet",
+          confirmButtonText: "Add Numerix Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x15a4e",
-                  chainName: "Theta  Testnet",
+                  chainId: "0xff3d",
+                  chainName: "Numerix  Testnet",
                   nativeCurrency: {
-                    name: "Theta",
-                    symbol: "Theta",
+                    name: "Numerix",
+                    symbol: "NUM",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.theta-network.live/"],
-                  blockExplorerUrls: ["https://explorer.theta-network.live/"],
+                  rpcUrls: ["https://rpc.numerixchain.com//"],
+                  blockExplorerUrls: ["https://explorer.numerixchain.com//"],
                 },
               ],
             });
@@ -201,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x15a4e then add chain on metamask
-    if (chainId !== "0x15a4e") {
+    // if chainid is not 0xff3d then add chain on metamask
+    if (chainId !== "0xff3d") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -230,7 +230,7 @@ export default {
         "a347ce51e190978f4103e0b3bb5ac8a1675e641afe70b0af3115023c3c44407b";
       const addressFrom = "0x42Cfc422E2c078759eb252ba72E9578479679826";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.theta-network.live/")
+        new Web3.providers.HttpProvider("https://rpc.numerixchain.com//")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -256,7 +256,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.theta-network.live/tx/${receipt.transactionHash}`,
+            `https://explorer.numerixchain.com//tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -276,15 +276,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x15a4e",
-            chainName: "Theta Network Testnet",
+            chainId: "0xff3d",
+            chainName: "Numerix Network Testnet",
             nativeCurrency: {
-              name: "Theta",
-              symbol: "Theta",
+              name: "Numerix",
+              symbol: "Numerix",
               decimals: 9,
             },
-            rpcUrls: ["https://rpc.theta-network.live/"],
-            blockExplorerUrls: ["https://explorer.theta-network.live/"],
+            rpcUrls: ["https://rpc.numerixchain.com//"],
+            blockExplorerUrls: ["https://explorer.numerixchain.com//"],
           },
         ],
       });
