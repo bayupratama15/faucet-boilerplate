@@ -63,7 +63,7 @@
                   <span
                     class="title-font text-lg font-bold tracking-wide text-blue-900"
                   >
-                    Faucet Connexus
+                    Faucet Rust Network
                   </span>
                 </div>
               </div>
@@ -154,10 +154,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON Connexus Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Rust Network Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0xde31") {
+      if (chainId === "0x21ae") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,27 +168,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0xde31") {
+      if (chainId !== "0x21ae") {
         Swal.fire({
-          title: "Please add Connexus Testnet",
-          text: "Please add Connexus Testnet to your metamask",
+          title: "Please add Rust Network Testnet",
+          text: "Please add Rust Network Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Connexus Testnet",
+          confirmButtonText: "Add Rust Network Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0xde31",
+                  chainId: "0x21ae",
                   chainName: "Connexus  Testnet",
                   nativeCurrency: {
                     name: "Connexus",
                     symbol: "NUM",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://rpc.connexuschain.live//"],
-                  blockExplorerUrls: ["https://explorer.connexuschain.live//"],
+                  rpcUrls: ["https://testnet-rpc.rustnetwork.io/"],
+                  blockExplorerUrls: ["https://explorer.rustnetwork.io/"],
                 },
               ],
             });
@@ -201,8 +201,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0xde31 then add chain on metamask
-    if (chainId !== "0xde31") {
+    // if chainid is not 0x21ae then add chain on metamask
+    if (chainId !== "0x21ae") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -230,7 +230,7 @@ export default {
         "a347ce51e190978f4103e0b3bb5ac8a1675e641afe70b0af3115023c3c44407b";
       const addressFrom = "0x42Cfc422E2c078759eb252ba72E9578479679826";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://rpc.connexuschain.live//")
+        new Web3.providers.HttpProvider("https://testnet-rpc.rustnetwork.io/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -256,7 +256,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.connexuschain.live//tx/${receipt.transactionHash}`,
+            `https://explorer.rustnetwork.io/tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -276,15 +276,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0xde31",
+            chainId: "0x21ae",
             chainName: "Connexus Network Testnet",
             nativeCurrency: {
               name: "Connexus",
               symbol: "Connexus",
               decimals: 9,
             },
-            rpcUrls: ["https://rpc.connexuschain.live//"],
-            blockExplorerUrls: ["https://explorer.connexuschain.live//"],
+            rpcUrls: ["https://testnet-rpc.rustnetwork.io/"],
+            blockExplorerUrls: ["https://explorer.rustnetwork.io/"],
           },
         ],
       });
