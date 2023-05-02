@@ -32,87 +32,55 @@
     </div>
   </div>
   <div
-    class="container mx-auto p-6 bg-blue-900 flex h-screen justify-center items-center"
+    class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
   >
-    <div class="flex-1 p-4">
+    <div class="relative py-3 sm:max-w-xl sm:mx-auto w-full sm:w-3/4">
       <div
-        class="card w-full h-full bg-transparent hover:bg-gradient-to-r hover: hover:to-[#b2eff7] transition hover:rounded-lg hover:drop-shadow-3xl hover:ease-in-out"
+        class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"
+      ></div>
+      <div
+        class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20"
       >
-        <div
-          class="block h-full overflow-hidden rounded-lg border bg-gradient-to-r from-[#ffa0ae,5%] to-[#b2eff7] opacity-90 shadow-md transition ease-in-out hover:cursor-pointer hover:from-[#ffa0ae,5%] hover:to-[#b2eff7] hover:opacity-100 hover:transition hover:duration-500 sm:flex-row"
-        >
-          <div class="p-4 sm:ml-16 md:ml-32 lg:ml-0">
-            <!-- heading -->
-            <div class="-mx-2 flex flex-wrap text-center sm:mx-auto sm:mb-2">
-              <div class="p-2">
-                <div
-                  class="flex h-full items-center justify-center rounded-lg p-4"
+        <div class="max-w-md mx-auto">
+          <div>
+            <h1 class="text-2xl font-semibold">Faucet Numerix Chain</h1>
+          </div>
+          <div class="divide-y divide-gray-200">
+            <div
+              class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+            >
+              <div class="relative">
+                <input
+                  autocomplete="off"
+                  id="address"
+                  name="address"
+                  type="text"
+                  class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+                  placeholder="0x0000000000000000000000000000000000000000"
+                  v-model="address"
+                />
+                <label
+                  for="address"
+                  class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                 >
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="3"
-                    class="mr-4 h-6 w-6 flex-shrink-0 text-indigo-500"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-                    <path d="M22 4L12 14.01l-3-3"></path>
-                  </svg>
-                  <span
-                    class="title-font text-lg font-bold tracking-wide text-blue-900"
-                  >
-                    Faucet Rust Network
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="lg:px-4 lg:pb-2">
-              <div class="flex flex-wrap -mx-3 mb-6 ml-1">
-                <span class="text-gray-700 text-sm font-bold"
-                  >Enter your address to get 10 tokens</span
+                  Address</label
                 >
               </div>
-              <!-- FORM INPUT WITH BUTTON -->
-              <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                  <label
-                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    for="grid-password"
-                  >
-                    Address
-                  </label>
-                  <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-password"
-                    type="text"
-                    placeholder="0x0000000000000000000000000000000000000000"
-                    v-model="address"
-                  />
-                  <p class="text-gray-600 text-xs italic">
-                    Please enter your address
-                  </p>
-                </div>
-              </div>
-              <!-- BUTTON -->
-              <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                  <button
-                    v-if="btnTransaction"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded animate-bounce"
-                    @click="sendTransaction()"
-                  >
-                    Get Tokens
-                  </button>
-                  <button
-                    v-if="btnMetamask"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded animate-bounce"
-                    @click="connectMetamask"
-                  >
-                    Add to Metamask
-                  </button>
-                </div>
+              <div class="relative">
+                <button
+                  v-if="btnTransaction"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded animate-bounce"
+                  @click="sendTransaction()"
+                >
+                  Get Tokens
+                </button>
+                <button
+                  v-if="btnMetamask"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded animate-bounce"
+                  @click="connectMetamask"
+                >
+                  Add to Metamask
+                </button>
               </div>
             </div>
           </div>
@@ -154,10 +122,10 @@ export default {
     window.ethereum.on("accountsChanged", (accounts) => {
       this.getAccount();
     });
-    // DETECTION OF NETWORK IF NOT ON Rust Network Testnet THEN ADD CHAIN ON METAMASK
+    // DETECTION OF NETWORK IF NOT ON Numerix Chain Testnet THEN ADD CHAIN ON METAMASK
     window.ethereum.on("chainChanged", (chainId) => {
       console.log(chainId);
-      if (chainId === "0x21ae") {
+      if (chainId === "0xff3d") {
         Swal.fire({
           icon: "success",
           title: "You are on the right network",
@@ -168,27 +136,27 @@ export default {
         this.btnTransaction = true;
         this.btnMetamask = false;
       }
-      if (chainId !== "0x21ae") {
+      if (chainId !== "0xff3d") {
         Swal.fire({
-          title: "Please add Rust Network Testnet",
-          text: "Please add Rust Network Testnet to your metamask",
+          title: "Please add Numerix Chain Testnet",
+          text: "Please add Numerix Chain Testnet to your metamask",
           icon: "warning",
-          confirmButtonText: "Add Rust Network Testnet",
+          confirmButtonText: "Add Numerix Chain Testnet",
         }).then((result) => {
           if (result.isConfirmed) {
             window.ethereum.request({
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x21ae",
-                  chainName: "Connexus  Testnet",
+                  chainId: "0xff3d",
+                  chainName: "NUM  Testnet",
                   nativeCurrency: {
-                    name: "Connexus",
+                    name: "NUM",
                     symbol: "NUM",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://testnet-rpc.rustnetwork.io/"],
-                  blockExplorerUrls: ["https://explorer.rustnetwork.io/"],
+                  rpcUrls: ["https://rpc.numerixchain.com/"],
+                  blockExplorerUrls: ["https://explorer.numerixchain.com//"],
                 },
               ],
             });
@@ -201,8 +169,8 @@ export default {
       method: "eth_chainId",
     });
     console.log(chainId);
-    // if chainid is not 0x21ae then add chain on metamask
-    if (chainId !== "0x21ae") {
+    // if chainid is not 0xff3d then add chain on metamask
+    if (chainId !== "0xff3d") {
       this.btnTransaction = false;
       this.btnMetamask = true;
     } else {
@@ -230,7 +198,7 @@ export default {
         "a347ce51e190978f4103e0b3bb5ac8a1675e641afe70b0af3115023c3c44407b";
       const addressFrom = "0x42Cfc422E2c078759eb252ba72E9578479679826";
       const web3 = new Web3(
-        new Web3.providers.HttpProvider("https://testnet-rpc.rustnetwork.io/")
+        new Web3.providers.HttpProvider("https://rpc.numerixchain.com/")
       );
       try {
         const nonce = await web3.eth.getTransactionCount(addressFrom);
@@ -256,7 +224,7 @@ export default {
         }).then(() => {
           // redirect to tx page target="_blank"
           window.open(
-            `https://explorer.rustnetwork.io/tx/${receipt.transactionHash}`,
+            `https://explorer.numerixchain.com//tx/${receipt.transactionHash}`,
             "_blank"
           );
         });
@@ -276,15 +244,15 @@ export default {
         method: "wallet_addEthereumChain",
         params: [
           {
-            chainId: "0x21ae",
-            chainName: "Connexus Network Testnet",
+            chainId: "0xff3d",
+            chainName: "Numerix Chain Testnet",
             nativeCurrency: {
-              name: "Connexus",
-              symbol: "Connexus",
+              name: "NUM",
+              symbol: "NUM",
               decimals: 9,
             },
-            rpcUrls: ["https://testnet-rpc.rustnetwork.io/"],
-            blockExplorerUrls: ["https://explorer.rustnetwork.io/"],
+            rpcUrls: ["https://rpc.numerixchain.com/"],
+            blockExplorerUrls: ["https://explorer.numerixchain.com//"],
           },
         ],
       });
